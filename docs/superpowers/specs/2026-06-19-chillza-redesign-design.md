@@ -39,7 +39,7 @@ The can is the largest identifiable object and the clearest point of contrast. T
 - Copy occupies the left side; the commercial product composition occupies the center-right and may extend beyond the viewport edges.
 - The can is enlarged roughly 25–35% relative to the current implementation, positioned center-right, and allowed to crop slightly at large breakpoints if this increases impact.
 - The mango composition forms one large base and rising arc around the can. Mango flesh and leaves appear both behind the can and across a limited portion of its lower edge to create convincing occlusion.
-- The mascot sits beside and slightly behind the can, with a controlled overlap into the composition. It is moderately larger than in the current site but never approaches the can's scale or contrast.
+- The mascot sits beside and slightly behind the can, with a controlled overlap into the composition. Its visible height targets 60–70% of the can height so it contributes strongly to CHILL ZA's brand identity while remaining secondary in scale, placement, and contrast.
 - The circular price badge sits inside the composition rather than in an unrelated corner.
 
 ### Artwork Asset Strategy
@@ -218,6 +218,7 @@ Implementation is complete only when:
 - The can is unmistakably the largest and most important visual element.
 - Mango, ice, splash, mascot, badge, and background share believable depth and lighting.
 - The mascot is clearly visible but secondary to the can.
+- The mascot renders at approximately 60–70% of the can's visible height at representative desktop and mobile breakpoints.
 - Automated checks cover content, navigation, CTAs, video behavior, social links, and the transparent-can path.
 - Type checking, linting, unit tests, end-to-end tests, and production build pass.
 - Browser verification covers representative desktop and mobile viewports, keyboard interaction, reduced motion, asset loading, and screenshot inspection for occlusion/cropping defects.
@@ -229,4 +230,3 @@ Implementation is complete only when:
 - Adding ecommerce checkout, authentication, a CMS, or new backend services
 - Generating a replacement mascot
 - Adding decorative elements solely to fill space
-
