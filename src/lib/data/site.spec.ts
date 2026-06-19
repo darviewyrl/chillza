@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { benefits, navigation, product, socialLinks, teamMembers } from './site';
+import { benefits, campaignArtwork, navigation, product, socialLinks, teamMembers } from './site';
 
 describe('CHILL ZA site data', () => {
 	it('contains the complete product and navigation content', () => {
@@ -15,6 +15,31 @@ describe('CHILL ZA site data', () => {
 			'#team'
 		]);
 		expect(socialLinks).toHaveLength(2);
+	});
+
+	it('uses the approved transparent can and campaign artwork', () => {
+		expect(product.image).toBe('/images/chillza-can-transparent.png');
+		expect(campaignArtwork).toEqual({
+			atmosphere: '/images/campaign/hero-atmosphere.webp',
+			foreground: '/images/campaign/hero-foreground.png'
+		});
+	});
+
+	it('contains English-only campaign content and official social IDs', () => {
+		const serialized = JSON.stringify({ product, benefits, teamMembers, socialLinks });
+		expect(serialized).not.toMatch(/[\u0E00-\u0E7F]/);
+		expect(serialized).not.toContain('๏ฟฝ');
+		expect(socialLinks.map((item) => item.icon)).toEqual(['facebook', 'instagram']);
+		expect(teamMembers.map((member) => member.name)).toEqual([
+			'Surada Supasri',
+			'Kritaporn Chooitjin',
+			'Nannapas Nilket',
+			'Warunpack Bunruangsri',
+			'Tharathep Hariwon',
+			'Chanathip Wongsamran',
+			'Pongsakorn Nichkasem',
+			'Phachara Suphamethanon'
+		]);
 	});
 
 	it('keeps all eight team members in editable structured data', () => {

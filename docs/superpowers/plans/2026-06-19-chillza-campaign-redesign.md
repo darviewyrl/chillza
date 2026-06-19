@@ -39,6 +39,7 @@
 ### Task 1: Lock content and asset invariants with failing tests
 
 **Files:**
+
 - Modify: `src/lib/data/site.spec.ts`
 - Modify: `tests/landing.e2e.ts`
 
@@ -117,6 +118,7 @@ git commit -m "test: define campaign redesign requirements"
 ### Task 2: Add professional icon dependencies and deploy the transparent can
 
 **Files:**
+
 - Modify: `package.json`
 - Modify: `package-lock.json`
 - Create: `static/images/chillza-can-transparent.png`
@@ -151,6 +153,7 @@ git commit -m "feat: add campaign icon libraries and transparent can"
 ### Task 3: Normalize all site data to English and typed icon identifiers
 
 **Files:**
+
 - Modify: `src/lib/data/site.ts`
 - Test: `src/lib/data/site.spec.ts`
 
@@ -201,6 +204,7 @@ git commit -m "feat: normalize chill za campaign content"
 ### Task 4: Build reusable Lucide and official social icon components
 
 **Files:**
+
 - Create: `src/lib/components/Icon.svelte`
 - Create: `src/lib/components/SocialIcon.svelte`
 - Modify: `src/lib/components/Navbar.svelte.test.ts`
@@ -210,8 +214,12 @@ git commit -m "feat: normalize chill za campaign content"
 Render `Navbar` and assert links named Facebook and Instagram each contain an SVG with `data-brand-icon` equal to the expected name.
 
 ```ts
-expect(screen.getByRole('link', { name: 'Facebook' }).querySelector('[data-brand-icon="facebook"]')).toBeTruthy();
-expect(screen.getByRole('link', { name: 'Instagram' }).querySelector('[data-brand-icon="instagram"]')).toBeTruthy();
+expect(
+	screen.getByRole('link', { name: 'Facebook' }).querySelector('[data-brand-icon="facebook"]')
+).toBeTruthy();
+expect(
+	screen.getByRole('link', { name: 'Instagram' }).querySelector('[data-brand-icon="instagram"]')
+).toBeTruthy();
 ```
 
 - [ ] **Step 2: Run the navbar test to verify failure**
@@ -229,13 +237,7 @@ Map the typed names to `Leaf`, `Citrus`, `Sparkles`, `CandyOff`, `Droplets`, `Sh
 Import `siFacebook` and `siInstagram` from `simple-icons`, select by `SocialIconName`, and render:
 
 ```svelte
-<svg
-	data-brand-icon={name}
-	viewBox="0 0 24 24"
-	role="img"
-	aria-hidden="true"
-	class={className}
->
+<svg data-brand-icon={name} viewBox="0 0 24 24" role="img" aria-hidden="true" class={className}>
 	<path d={icon.path} fill="currentColor" />
 </svg>
 ```
@@ -250,6 +252,7 @@ git commit -m "feat: add professional campaign icons"
 ### Task 5: Create and validate the campaign artwork
 
 **Files:**
+
 - Create: `static/images/campaign/hero-atmosphere.webp`
 - Create: `static/images/campaign/hero-foreground.png`
 
@@ -291,6 +294,7 @@ git commit -m "feat: add chill za campaign artwork"
 ### Task 6: Build the unified hero art stage
 
 **Files:**
+
 - Create: `src/lib/components/HeroArt.svelte`
 - Create: `src/lib/components/HeroArt.svelte.test.ts`
 - Modify: `src/lib/components/Hero.svelte`
@@ -329,8 +333,12 @@ Set the can as the art-stage scale reference and size the mascot to 60–70% of 
 	--can-height: min(86cqh, 46rem);
 	--mascot-ratio: 0.66;
 }
-.hero-can { height: var(--can-height); }
-.hero-mascot { height: calc(var(--can-height) * var(--mascot-ratio)); }
+.hero-can {
+	height: var(--can-height);
+}
+.hero-mascot {
+	height: calc(var(--can-height) * var(--mascot-ratio));
+}
 ```
 
 Add shared amber reflection, realistic can shadow, subtle restrained float, foreground occlusion, and breakpoint-specific positions. Keep the can above the mascot and below the physically plausible foreground layer.
@@ -355,6 +363,7 @@ git commit -m "feat: build unified beverage campaign hero"
 ### Task 7: Extend the campaign system across navigation and every section
 
 **Files:**
+
 - Modify: `src/lib/components/Navbar.svelte`
 - Modify: `src/lib/components/BenefitCard.svelte`
 - Modify: `src/lib/components/ProductDetails.svelte`
@@ -410,6 +419,7 @@ git commit -m "feat: extend campaign design across landing page"
 ### Task 8: Responsive, accessibility, and browser acceptance pass
 
 **Files:**
+
 - Modify: `src/routes/layout.css`
 - Modify: `tests/landing.e2e.ts`
 

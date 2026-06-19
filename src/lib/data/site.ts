@@ -1,8 +1,18 @@
+export type IconName =
+	| 'leaf'
+	| 'mango'
+	| 'sparkles'
+	| 'low-sugar'
+	| 'droplets'
+	| 'shopping-bag'
+	| 'play'
+	| 'users';
+
+export type SocialIconName = 'facebook' | 'instagram';
+
 export interface Product {
 	brand: string;
-	thaiBrand: string;
 	name: string;
-	thaiName: string;
 	type: string;
 	flavor: string;
 	slogan: string;
@@ -14,14 +24,14 @@ export interface Product {
 export interface Benefit {
 	title: string;
 	description: string;
-	icon: string;
+	icon: IconName;
 }
 
 export interface SocialLink {
 	name: string;
 	handle: string;
 	href: string;
-	icon: string;
+	icon: SocialIconName;
 }
 
 export interface TeamMember {
@@ -32,17 +42,20 @@ export interface TeamMember {
 	imageAvailable: boolean;
 }
 
+export const campaignArtwork = {
+	atmosphere: '/images/campaign/hero-atmosphere.webp',
+	foreground: '/images/campaign/hero-foreground.png'
+} as const;
+
 export const product: Product = {
 	brand: 'CHILL ZA',
-	thaiBrand: 'ชิวซ่า',
 	name: 'CHILL ZA Mango Soda',
-	thaiName: 'ชิวซ่า มะม่วงโซดา',
 	type: 'Mango Soda Sparkling Tea',
 	flavor: 'Mango Soda',
 	slogan: 'Chill Your Day, Pop Your Mood!',
 	price: 20,
-	bestFor: 'Hot days, relaxing moments, and fun breaks',
-	image: '/images/chillza-can.png'
+	bestFor: 'Hot days, bright breaks, and easy refreshment',
+	image: '/images/chillza-can-transparent.png'
 };
 
 export const navigation = [
@@ -55,14 +68,14 @@ export const navigation = [
 ] as const;
 
 export const benefits: Benefit[] = [
-	{ icon: '🍃', title: 'Real Tea Extract', description: 'Rich aroma from real tea leaves' },
-	{ icon: '🥭', title: 'Sweet Mango Flavor', description: 'Deliciously sweet and tropical' },
+	{ icon: 'leaf', title: 'Real Tea Extract', description: 'Rich aroma from real tea leaves.' },
+	{ icon: 'mango', title: 'Sweet Mango Flavor', description: 'Deliciously sweet and tropical.' },
 	{
-		icon: '🫧',
+		icon: 'sparkles',
 		title: 'Sparkling & Refreshing',
-		description: 'Fizzy and refreshing, perfect for any day'
+		description: 'Fizzy and refreshing, perfect for any day.'
 	},
-	{ icon: '✨', title: 'Low Sugar', description: 'Light taste with fewer calories' }
+	{ icon: 'low-sugar', title: 'Low Sugar', description: 'Light taste with fewer calories.' }
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -70,70 +83,70 @@ export const socialLinks: SocialLink[] = [
 		name: 'Facebook',
 		handle: 'Chill Za Thailand',
 		href: 'https://facebook.com/ChillZaThailand',
-		icon: 'f'
+		icon: 'facebook'
 	},
 	{
 		name: 'Instagram',
 		handle: '@chillza.official',
 		href: 'https://instagram.com/chillza.official',
-		icon: '◎'
+		icon: 'instagram'
 	}
 ];
 
 export const teamMembers: TeamMember[] = [
 	{
-		name: 'นางสาว สุรดา ศุภสีห์',
+		name: 'Surada Supasri',
 		studentNumber: '01',
-		role: 'ผู้จัดเตรียมสถานที่ถ่ายทำโฆษณา',
+		role: 'Location Preparation',
 		image: '/images/team/member-01.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นางสาว กฤตภรณ์ ชูอิฐจีน',
+		name: 'Kritaporn Chooitjin',
 		studentNumber: '04',
-		role: 'ผู้จัดเตรียมสถานที่ถ่ายทำโฆษณา',
+		role: 'Location Preparation',
 		image: '/images/team/member-04.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นางสาว นันท์นภัส นิลเกษ',
+		name: 'Nannapas Nilket',
 		studentNumber: '06',
-		role: 'ผู้จัดเตรียมสถานที่ถ่ายทำโฆษณา',
+		role: 'Location Preparation',
 		image: '/images/team/member-06.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นาย วรุญพักตรุ์ บุญเรืองศรี',
+		name: 'Warunpack Bunruangsri',
 		studentNumber: '12',
-		role: 'ผู้คิดบทโฆษณา และนักแสดงในฉาก',
+		role: 'Script Writer & Actor',
 		image: '/images/team/member-12.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นาย ธราเทพ หาริวร',
+		name: 'Tharathep Hariwon',
 		studentNumber: '15',
-		role: 'ผู้คิดบทโฆษณา',
+		role: 'Script Writer',
 		image: '/images/team/member-15.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นาย ชนาธิป วงศ์สำราญ',
+		name: 'Chanathip Wongsamran',
 		studentNumber: '19',
-		role: 'ตากล้องถ่ายโฆษณา',
+		role: 'Videographer',
 		image: '/images/team/member-19.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นาย พงศกรณ์ นิจเกษม',
+		name: 'Pongsakorn Nichkasem',
 		studentNumber: '27',
-		role: 'ผู้จัดทำเว็บไซต์ โปสเตอร์ และออกแบบสินค้า',
+		role: 'Website Developer, Poster Designer & Product Designer',
 		image: '/images/team/member-27.jpg',
 		imageAvailable: false
 	},
 	{
-		name: 'นาย พชร ศุภเมธานนท์',
+		name: 'Phachara Suphamethanon',
 		studentNumber: '34',
-		role: 'ผู้จัดเตรียมสถานที่ถ่ายทำโฆษณา',
+		role: 'Location Preparation',
 		image: '/images/team/member-34.jpg',
 		imageAvailable: false
 	}

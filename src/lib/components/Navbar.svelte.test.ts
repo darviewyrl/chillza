@@ -16,4 +16,14 @@ describe('Navbar', () => {
 		await fireEvent.click(within(mobileNavigation).getByRole('link', { name: 'Benefits' }));
 		expect(toggle).toHaveAttribute('aria-expanded', 'false');
 	});
+
+	it('renders official social brand icons', () => {
+		render(Navbar);
+		expect(
+			screen.getByRole('link', { name: 'Facebook' }).querySelector('[data-brand-icon="facebook"]')
+		).toBeTruthy();
+		expect(
+			screen.getByRole('link', { name: 'Instagram' }).querySelector('[data-brand-icon="instagram"]')
+		).toBeTruthy();
+	});
 });

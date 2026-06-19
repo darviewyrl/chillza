@@ -41,5 +41,9 @@
 		"typescript-eslint": "^8.60.1",
 		"vite": "^8.0.16",
 		"vitest": "^4.1.8"
+	},
+	"dependencies": {
+		"lucide-svelte": "^1.0.1",
+		"simple-icons": "^16.23.0"
 	}
 }

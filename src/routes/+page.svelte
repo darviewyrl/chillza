@@ -27,10 +27,10 @@
 </script>
 
 <svelte:head>
-	<title>CHILL ZA Mango Soda | Chill Your Day, Pop Your Mood!</title>
+	<title>CHILL ZA Mango Soda | Premium Mango Sparkling Tea</title>
 	<meta
 		name="description"
-		content="Meet CHILL ZA Mango Soda Sparkling Tea—a bright, fizzy mango drink made for hot days and fun breaks. Only 20 Baht."
+		content="Discover CHILL ZA Mango Soda Sparkling Tea, a bright commercial-style beverage launch experience with juicy mango flavor, tea extract, and sparkling refreshment. Only 20 Baht."
 	/>
 	<meta property="og:title" content="CHILL ZA Mango Soda" />
 	<meta property="og:description" content="Chill Your Day, Pop Your Mood!" />
@@ -41,18 +41,9 @@
 <main>
 	<Hero onOrder={openOrderModal} />
 
-	<section id="benefits" class="scroll-mt-20 bg-[#fffaf0] py-24">
+	<section id="benefits" class="benefits-section scroll-mt-20">
 		<div class="page-shell">
-			<div class="mx-auto mb-12 max-w-2xl text-center">
-				<p class="section-kicker">Why you'll love it</p>
-				<h2 class="section-title">
-					Four reasons to<br /><span class="text-orange-500">pop your mood.</span>
-				</h2>
-				<p class="mt-4 text-lg text-stone-600">
-					A little tea, a lot of mango, and just the right amount of sparkle.
-				</p>
-			</div>
-			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="benefits-band">
 				{#each benefits as benefit, index (benefit.title)}
 					<BenefitCard {benefit} {index} />
 				{/each}
@@ -64,13 +55,13 @@
 	<VideoPlaceholder />
 	<ContactSection />
 
-	<section id="team" class="scroll-mt-20 overflow-hidden bg-[#fffaf0] py-24">
+	<section id="team" class="scroll-mt-20 bg-[color:var(--surface-soft)] py-24">
 		<div class="page-shell">
 			<div class="mx-auto mb-12 max-w-3xl text-center">
-				<p class="section-kicker">The people behind the pop</p>
-				<h2 class="section-title">Created By</h2>
+				<p class="section-kicker">Team</p>
+				<h2 class="section-title">The People Behind CHILL ZA</h2>
 				<p class="mt-4 text-lg leading-relaxed text-stone-600">
-					จัดทำโดย นักเรียนชั้น ม.6/4 โรงเรียนมารีย์วิทยา นครราชสีมา
+					Grade 12/4 Students · Marie Wittaya School · Nakhon Ratchasima
 				</p>
 			</div>
 			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

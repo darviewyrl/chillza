@@ -12,6 +12,22 @@ test.describe('CHILL ZA landing page', () => {
 		}
 		await expect(page.getByText('Only', { exact: true })).toBeVisible();
 		await expect(page.getByText('20', { exact: true }).first()).toBeVisible();
+		await expect(page.locator('[data-hero-can]')).toHaveAttribute(
+			'src',
+			'/images/chillza-can-transparent.png'
+		);
+		await expect(page.locator('[data-hero-mascot]')).toBeVisible();
+		await expect(page.locator('[data-campaign-atmosphere]')).toBeVisible();
+		await expect(page.locator('body')).not.toContainText(/[\u0E00-\u0E7F]/);
+		const ratio = await page.evaluate(() => {
+			const can = document.querySelector<HTMLElement>('[data-hero-can]')!.getBoundingClientRect();
+			const mascot = document
+				.querySelector<HTMLElement>('[data-hero-mascot]')!
+				.getBoundingClientRect();
+			return mascot.height / can.height;
+		});
+		expect(ratio).toBeGreaterThanOrEqual(0.6);
+		expect(ratio).toBeLessThanOrEqual(0.7);
 	});
 
 	test('opens the order modal and restores focus after Escape', async ({ page }) => {
@@ -27,7 +43,12 @@ test.describe('CHILL ZA landing page', () => {
 		const facebook = page.getByRole('link', { name: /facebook/i }).first();
 		await expect(facebook).toHaveAttribute('target', '_blank');
 		await expect(facebook).toHaveAttribute('rel', /noreferrer/);
-		await expect(page.getByText('พน', { exact: true })).toBeVisible();
+		await expect(facebook).toHaveAttribute('href', 'https://facebook.com/ChillZaThailand');
+		await expect(page.getByRole('link', { name: 'Instagram' }).first()).toHaveAttribute(
+			'href',
+			'https://instagram.com/chillza.official'
+		);
+		await expect(page.getByText('PN', { exact: true })).toBeVisible();
 	});
 
 	test('does not create horizontal page overflow', async ({ page }) => {
