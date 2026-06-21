@@ -13,12 +13,10 @@
 
 	let orderModalOpen = $state(false);
 	let orderTrigger: HTMLButtonElement | null = null;
-
 	function openOrderModal(event: MouseEvent) {
 		orderTrigger = event.currentTarget as HTMLButtonElement;
 		orderModalOpen = true;
 	}
-
 	async function closeOrderModal() {
 		orderModalOpen = false;
 		await tick();
@@ -30,7 +28,7 @@
 	<title>CHILL ZA Mango Soda | Premium Mango Sparkling Tea</title>
 	<meta
 		name="description"
-		content="Discover CHILL ZA Mango Soda Sparkling Tea, a bright commercial-style beverage launch experience with juicy mango flavor, tea extract, and sparkling refreshment. Only 20 Baht."
+		content="Meet CHILL ZA: sweet mango, real tea, and sparkling refreshment in one bright can. Only 20 Baht."
 	/>
 	<meta property="og:title" content="CHILL ZA Mango Soda" />
 	<meta property="og:description" content="Chill Your Day, Pop Your Mood!" />
@@ -40,9 +38,9 @@
 <Navbar />
 <main>
 	<Hero onOrder={openOrderModal} />
-
 	<section id="benefits" class="benefits-section scroll-mt-20">
 		<div class="page-shell">
+			<h2 class="benefits-title">Feels good. Tastes better.</h2>
 			<div class="benefits-band">
 				{#each benefits as benefit, index (benefit.title)}
 					<BenefitCard {benefit} {index} />
@@ -50,21 +48,17 @@
 			</div>
 		</div>
 	</section>
-
 	<ProductDetails />
 	<VideoPlaceholder />
 	<ContactSection />
-
-	<section id="team" class="scroll-mt-20 bg-[color:var(--surface-soft)] py-24">
+	<section id="team" class="team-section scroll-mt-20">
 		<div class="page-shell">
-			<div class="mx-auto mb-12 max-w-3xl text-center">
-				<p class="section-kicker">Team</p>
-				<h2 class="section-title">The People Behind CHILL ZA</h2>
-				<p class="mt-4 text-lg leading-relaxed text-stone-600">
-					Grade 12/4 Students · Marie Wittaya School · Nakhon Ratchasima
-				</p>
+			<div class="team-heading">
+				<p class="section-kicker">Creative Project</p>
+				<h2 class="section-title">Created By</h2>
+				<p class="section-intro">Grade 12/4 Students · Marie Vittaya School · Nakhon Ratchasima</p>
 			</div>
-			<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="team-list">
 				{#each teamMembers as member (member.studentNumber)}
 					<TeamMemberCard {member} />
 				{/each}
@@ -73,5 +67,4 @@
 	</section>
 </main>
 <Footer />
-
 <ComingSoonModal open={orderModalOpen} onClose={closeOrderModal} />

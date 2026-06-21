@@ -20,8 +20,10 @@ describe('CHILL ZA site data', () => {
 	it('uses the approved transparent can and campaign artwork', () => {
 		expect(product.image).toBe('/images/chillza-can-transparent.png');
 		expect(campaignArtwork).toEqual({
-			atmosphere: '/images/campaign/hero-atmosphere.webp',
-			foreground: '/images/campaign/hero-foreground.png'
+			desktop: '/images/use/gpt-artwork-desktop.png',
+			mobile: '/images/use/gpt-artwork-mobile.png',
+			title: '/images/use/icon-hero.png',
+			price: '/images/use/icon-price.png'
 		});
 	});
 

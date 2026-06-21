@@ -6,13 +6,23 @@ describe('HeroArt', () => {
 	it('renders the campaign art hierarchy with approved assets', () => {
 		const { container } = render(HeroArt);
 
-		expect(screen.getByAltText('CHILL ZA Mango Soda can')).toHaveAttribute(
+		expect(screen.getByAltText('CHILL ZA Mango Soda with the CHILL ZA mascot')).toHaveAttribute(
 			'src',
-			'/images/chillza-can-transparent.png'
+			'/images/use/gpt-artwork-desktop.png'
 		);
-		expect(screen.getByAltText('CHILL ZA brand mascot')).toBeInTheDocument();
-		expect(container.querySelector('[data-campaign-atmosphere]')).toBeTruthy();
-		expect(container.querySelector('[data-campaign-foreground]')).toHaveAttribute('alt', '');
-		expect(screen.getByText('20')).toBeVisible();
+		expect(container.querySelector('source')).toHaveAttribute(
+			'srcset',
+			'/images/use/gpt-artwork-mobile.png'
+		);
+		expect(screen.getByAltText('CHILL ZA — Chill Your Day, Pop Your Mood!')).toHaveAttribute(
+			'src',
+			'/images/use/icon-hero.png'
+		);
+		expect(screen.getByAltText('Only 20 Baht')).toHaveAttribute(
+			'src',
+			'/images/use/icon-price.png'
+		);
+		expect(container.querySelector('[data-hero-can]')).toBeNull();
+		expect(container.querySelector('[data-hero-mascot]')).toBeNull();
 	});
 });

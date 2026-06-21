@@ -43,8 +43,10 @@ export interface TeamMember {
 }
 
 export const campaignArtwork = {
-	atmosphere: '/images/campaign/hero-atmosphere.webp',
-	foreground: '/images/campaign/hero-foreground.png'
+	desktop: '/images/use/gpt-artwork-desktop.png',
+	mobile: '/images/use/gpt-artwork-mobile.png',
+	title: '/images/use/icon-hero.png',
+	price: '/images/use/icon-price.png'
 } as const;
 
 export const product: Product = {

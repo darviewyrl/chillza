@@ -1,0 +1,4 @@
+{"type":"server-started","port":64955,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:64955","screen_dir":"D:\\ipaidekzian\\school.chillza\\.superpowers\\brainstorm\\12220-1781823289\\content","state_dir":"D:\\ipaidekzian\\school.chillza\\.superpowers\\brainstorm\\12220-1781823289\\state"}
+{"type":"screen-added","file":"D:\\ipaidekzian\\school.chillza\\.superpowers\\brainstorm\\12220-1781823289\\content\\composition-routes.html"}
+{"type":"screen-added","file":"D:\\ipaidekzian\\school.chillza\\.superpowers\\brainstorm\\12220-1781823289\\content\\hero-key-visual-v2.html"}
+{"type":"server-stopped","reason":"idle timeout"}

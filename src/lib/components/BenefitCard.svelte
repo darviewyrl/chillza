@@ -10,8 +10,7 @@
 		<Icon name={benefit.icon} class="benefit-icon" />
 	</div>
 	<div>
-		<p class="benefit-index">0{index + 1}</p>
+		<span class="sr-only">Benefit {index + 1}</span>
 		<h3 class="benefit-title">{benefit.title}</h3>
-		<p class="benefit-description">{benefit.description}</p>
 	</div>
 </article>

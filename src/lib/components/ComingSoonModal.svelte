@@ -1,7 +1,6 @@
 <script lang="ts">
 	let { open, onClose }: { open: boolean; onClose: () => void } = $props();
 	let dialog = $state<HTMLDivElement>();
-
 	$effect(() => {
 		if (!open) return;
 		const previousOverflow = document.body.style.overflow;
@@ -11,21 +10,14 @@
 			document.body.style.overflow = previousOverflow;
 		};
 	});
-
-	function handleKeydown(event: KeyboardEvent) {
-		if (open && event.key === 'Escape') onClose();
-	}
 </script>
 
-<svelte:window onkeydown={handleKeydown} />
-
+<svelte:window onkeydown={(event) => open && event.key === 'Escape' && onClose()} />
 {#if open}
 	<div
 		role="presentation"
-		class="fixed inset-0 z-[100] grid place-items-center bg-stone-950/70 p-5 backdrop-blur-sm"
-		onclick={(event) => {
-			if (event.target === event.currentTarget) onClose();
-		}}
+		class="modal-backdrop"
+		onclick={(event) => event.target === event.currentTarget && onClose()}
 	>
 		<div
 			bind:this={dialog}
@@ -33,26 +25,13 @@
 			aria-modal="true"
 			aria-label="Ordering coming soon"
 			tabindex="0"
-			class="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-white/70 bg-[#fffaf0] p-8 text-center shadow-2xl outline-none sm:p-10"
+			class="modal-card"
 		>
-			<div
-				aria-hidden="true"
-				class="absolute -right-10 -top-10 size-36 rounded-full bg-yellow-300/70"
-			></div>
-			<span
-				class="relative mx-auto grid size-16 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-orange-400 text-3xl shadow-lg"
-				>🥭</span
-			>
-			<p class="relative mt-6 text-xs font-black uppercase tracking-[0.22em] text-orange-600">
-				Order update
-			</p>
-			<h2 class="relative mt-2 text-4xl font-black text-stone-950">Coming Soon!</h2>
-			<p class="relative mt-3 leading-relaxed text-stone-600">
-				Our fizzy mango mood is almost ready to order. Follow us for the first pop!
-			</p>
-			<button type="button" class="cta-primary relative mt-7 w-full" onclick={onClose}
-				>Keep chilling</button
-			>
+			<span class="modal-mark" aria-hidden="true">ZA</span>
+			<p class="section-kicker">Order update</p>
+			<h2>Coming Soon!</h2>
+			<p>Our fizzy mango mood is almost ready to order. Follow us for the first pop.</p>
+			<button type="button" class="cta-primary" onclick={onClose}>Keep chilling</button>
 		</div>
 	</div>
 {/if}

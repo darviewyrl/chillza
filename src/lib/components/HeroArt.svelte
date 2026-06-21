@@ -1,35 +1,21 @@
 <script lang="ts">
-	import { campaignArtwork, product } from '$lib/data/site';
+	import { campaignArtwork } from '$lib/data/site';
 </script>
 
 <figure class="hero-art">
+	<picture class="hero-picture">
+		<source media="(max-width: 699px)" srcset={campaignArtwork.mobile} />
+		<img
+			src={campaignArtwork.desktop}
+			alt="CHILL ZA Mango Soda with the CHILL ZA mascot"
+			class="hero-artwork"
+			data-hero-artwork
+		/>
+	</picture>
 	<img
-		src={campaignArtwork.atmosphere}
-		alt=""
-		aria-hidden="true"
-		class="hero-atmosphere"
-		data-campaign-atmosphere
+		src={campaignArtwork.title}
+		alt="CHILL ZA — Chill Your Day, Pop Your Mood!"
+		class="hero-title-art"
 	/>
-	<div class="hero-aura" aria-hidden="true"></div>
-	<div class="hero-shadow" aria-hidden="true"></div>
-	<img
-		src="/images/chillza-character.png"
-		alt="CHILL ZA brand mascot"
-		class="hero-mascot"
-		data-hero-mascot
-	/>
-	<div class="hero-mango-shadow" aria-hidden="true"></div>
-	<img src={product.image} alt="CHILL ZA Mango Soda can" class="hero-can" data-hero-can />
-	<div class="hero-badge" aria-label={`Only ${product.price} Baht`}>
-		<span>Only</span>
-		<strong>{product.price}</strong>
-		<span>Baht</span>
-	</div>
-	<img
-		src={campaignArtwork.foreground}
-		alt=""
-		aria-hidden="true"
-		class="hero-foreground"
-		data-campaign-foreground
-	/>
+	<img src={campaignArtwork.price} alt="Only 20 Baht" class="hero-price-art" />
 </figure>

@@ -128,7 +128,7 @@ An all-English team section with restrained editorial cards and the following ex
 - Pongsakorn Nichkasem — Website Developer, Poster Designer & Product Designer
 - Phachara Suphamethanon — Location Preparation
 
-Subtitle: `Grade 12/4 Students · Marie Wittaya School · Nakhon Ratchasima`
+Subtitle: `Grade 12/4 Students · Marie Vittaya School · Nakhon Ratchasima`
 
 The team section remains visually consistent with the launch campaign through typography, color, spacing, and one deliberate mango accent. It does not introduce a new generic card aesthetic.
 

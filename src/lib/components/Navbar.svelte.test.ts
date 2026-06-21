@@ -20,10 +20,14 @@ describe('Navbar', () => {
 	it('renders official social brand icons', () => {
 		render(Navbar);
 		expect(
-			screen.getByRole('link', { name: 'Facebook' }).querySelector('[data-brand-icon="facebook"]')
+			screen
+				.getAllByRole('link', { name: 'Facebook' })[0]
+				.querySelector('[data-brand-icon="facebook"]')
 		).toBeTruthy();
 		expect(
-			screen.getByRole('link', { name: 'Instagram' }).querySelector('[data-brand-icon="instagram"]')
+			screen
+				.getAllByRole('link', { name: 'Instagram' })[0]
+				.querySelector('[data-brand-icon="instagram"]')
 		).toBeTruthy();
 	});
 });

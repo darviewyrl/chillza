@@ -10,24 +10,15 @@ test.describe('CHILL ZA landing page', () => {
 		for (const id of ['home', 'benefits', 'product', 'video', 'contact', 'team']) {
 			await expect(page.locator(`#${id}`)).toHaveCount(1);
 		}
-		await expect(page.getByText('Only', { exact: true })).toBeVisible();
-		await expect(page.getByText('20', { exact: true }).first()).toBeVisible();
-		await expect(page.locator('[data-hero-can]')).toHaveAttribute(
+		await expect(page.getByAltText('Only 20 Baht')).toBeVisible();
+		await expect(page.locator('[data-hero-artwork]')).toHaveAttribute(
 			'src',
-			'/images/chillza-can-transparent.png'
+			'/images/use/gpt-artwork-desktop.png'
 		);
-		await expect(page.locator('[data-hero-mascot]')).toBeVisible();
-		await expect(page.locator('[data-campaign-atmosphere]')).toBeVisible();
+		await expect(page.getByAltText('CHILL ZA — Chill Your Day, Pop Your Mood!')).toBeVisible();
+		await expect(page.locator('[data-hero-can]')).toHaveCount(0);
+		await expect(page.locator('[data-hero-mascot]')).toHaveCount(0);
 		await expect(page.locator('body')).not.toContainText(/[\u0E00-\u0E7F]/);
-		const ratio = await page.evaluate(() => {
-			const can = document.querySelector<HTMLElement>('[data-hero-can]')!.getBoundingClientRect();
-			const mascot = document
-				.querySelector<HTMLElement>('[data-hero-mascot]')!
-				.getBoundingClientRect();
-			return mascot.height / can.height;
-		});
-		expect(ratio).toBeGreaterThanOrEqual(0.6);
-		expect(ratio).toBeLessThanOrEqual(0.7);
 	});
 
 	test('opens the order modal and restores focus after Escape', async ({ page }) => {
@@ -48,7 +39,7 @@ test.describe('CHILL ZA landing page', () => {
 			'href',
 			'https://instagram.com/chillza.official'
 		);
-		await expect(page.getByText('PN', { exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Pongsakorn Nichkasem' })).toBeVisible();
 	});
 
 	test('does not create horizontal page overflow', async ({ page }) => {

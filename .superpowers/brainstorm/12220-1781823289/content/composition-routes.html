@@ -1,0 +1,268 @@
+<style>
+	.route-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+	.route {
+		border: 2px solid #eadfc7;
+		border-radius: 24px;
+		overflow: hidden;
+		background: #fffdf7;
+		cursor: pointer;
+		transition: 0.2s ease;
+	}
+	.route:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 18px 40px rgba(117, 74, 13, 0.13);
+	}
+	.route.selected {
+		border-color: #f97316;
+		box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.14);
+	}
+	.art {
+		height: 320px;
+		position: relative;
+		overflow: hidden;
+		background: #ffd34e;
+	}
+	.art img.can {
+		position: absolute;
+		z-index: 3;
+		object-fit: contain;
+		filter: drop-shadow(0 25px 18px rgba(95, 54, 0, 0.3));
+	}
+	.art img.mango {
+		position: absolute;
+		z-index: 2;
+		object-fit: contain;
+		filter: drop-shadow(0 12px 15px rgba(95, 54, 0, 0.2));
+	}
+	.art img.mascot {
+		position: absolute;
+		z-index: 2;
+		object-fit: contain;
+	}
+	.copy {
+		position: absolute;
+		z-index: 4;
+		color: #252018;
+	}
+	.copy b {
+		display: block;
+		font:
+			900 32px/0.86 Arial Black,
+			sans-serif;
+		letter-spacing: -2px;
+	}
+	.copy small {
+		font:
+			800 8px/1 Arial,
+			sans-serif;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: #196b42;
+	}
+	.pill {
+		display: inline-block;
+		margin-top: 10px;
+		padding: 7px 11px;
+		border-radius: 999px;
+		background: #222;
+		color: #fff;
+		font: 800 7px Arial;
+		letter-spacing: 1px;
+	}
+	.route-body {
+		padding: 16px 18px 18px;
+	}
+	.route-body h3 {
+		margin: 0 0 6px;
+		font-size: 18px;
+	}
+	.route-body p {
+		margin: 0;
+		font-size: 13px;
+		line-height: 1.45;
+		color: #6d6256;
+	}
+	.recommended {
+		display: inline-flex;
+		margin-bottom: 9px;
+		border-radius: 999px;
+		padding: 4px 8px;
+		background: #dcfce7;
+		color: #166534;
+		font: 800 9px Arial;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+	.a .copy {
+		left: 22px;
+		top: 38px;
+		width: 46%;
+	}
+	.a .can {
+		width: 46%;
+		height: 95%;
+		right: 17%;
+		top: 3%;
+	}
+	.a .mango {
+		width: 42%;
+		right: -8%;
+		bottom: -18%;
+	}
+	.a .mascot {
+		height: 42%;
+		right: -2%;
+		bottom: 1%;
+	}
+	.a:after {
+		content: '20฿';
+		position: absolute;
+		z-index: 5;
+		right: 18px;
+		top: 22px;
+		width: 46px;
+		height: 46px;
+		display: grid;
+		place-items: center;
+		border-radius: 50%;
+		background: #f97316;
+		color: white;
+		border: 3px solid white;
+		font: 900 14px Arial;
+		transform: rotate(7deg);
+	}
+	.b {
+		background: radial-gradient(circle at 50% 45%, #fff7c4 0 20%, #ffc928 64%, #f59e0b);
+	}
+	.b .copy {
+		left: 18px;
+		right: 18px;
+		bottom: 15px;
+		text-align: center;
+		color: white;
+		text-shadow: 0 2px 12px rgba(73, 39, 0, 0.25);
+	}
+	.b .can {
+		width: 66%;
+		height: 94%;
+		left: 17%;
+		top: -5%;
+	}
+	.b .mango {
+		width: 45%;
+		right: -10%;
+		bottom: -8%;
+	}
+	.b .mascot {
+		height: 32%;
+		left: -4%;
+		bottom: 0;
+	}
+	.c {
+		background: #fff7df;
+	}
+	.c:before {
+		content: '';
+		position: absolute;
+		inset: 0 0 0 52%;
+		background: #ffbf2f;
+		border-radius: 40px 0 0 40px;
+	}
+	.c .copy {
+		left: 18px;
+		top: 42px;
+		width: 42%;
+	}
+	.c .copy b {
+		font-size: 27px;
+	}
+	.c .can {
+		width: 42%;
+		height: 88%;
+		right: 6%;
+		top: 5%;
+	}
+	.c .mango {
+		width: 34%;
+		right: 35%;
+		bottom: -9%;
+	}
+	.c .mascot {
+		height: 31%;
+		right: -2%;
+		bottom: 0;
+	}
+	@media (max-width: 900px) {
+		.route-grid {
+			grid-template-columns: 1fr;
+		}
+		.art {
+			height: 280px;
+		}
+	}
+</style>
+
+<h2>Choose the hero composition</h2>
+<p class="subtitle">
+	All three preserve the 70/30 youthful–premium balance. The difference is how boldly the launch
+	moment is staged.
+</p>
+
+<div class="route-grid">
+	<div class="route" data-choice="a" onclick="toggleSelect(this)">
+		<div class="art a">
+			<div class="copy">
+				<small>Mango soda sparkling tea</small><b>CHILL ZA</b><span class="pill">ORDER NOW</span>
+			</div>
+			<img class="can" src="http://127.0.0.1:5173/images/chillza-can-transparent.png" alt="" />
+			<img class="mango" src="http://127.0.0.1:5173/images/mango.png" alt="" />
+			<img class="mascot" src="http://127.0.0.1:5173/images/chillza-character.png" alt="" />
+		</div>
+		<div class="route-body">
+			<span class="recommended">Recommended</span>
+			<h3>A. Campaign Split</h3>
+			<p>
+				Editorial copy on the left; a tightly layered can, mango, mascot, and price composition on
+				the right. Clearest product story and strongest fit with the specification.
+			</p>
+		</div>
+	</div>
+
+	<div class="route" data-choice="b" onclick="toggleSelect(this)">
+		<div class="art b">
+			<img class="can" src="http://127.0.0.1:5173/images/chillza-can-transparent.png" alt="" />
+			<img class="mango" src="http://127.0.0.1:5173/images/mango.png" alt="" />
+			<img class="mascot" src="http://127.0.0.1:5173/images/chillza-character.png" alt="" />
+			<div class="copy"><small>Pop your mood</small><b>CHILL ZA</b></div>
+		</div>
+		<div class="route-body">
+			<h3>B. Full-Stage Impact</h3>
+			<p>
+				The can owns the entire first viewport, with copy overlaid low. More dramatic and youthful,
+				but less readable and less aligned with the requested left/right hierarchy.
+			</p>
+		</div>
+	</div>
+
+	<div class="route" data-choice="c" onclick="toggleSelect(this)">
+		<div class="art c">
+			<div class="copy">
+				<small>Tropical sparkle</small><b>CHILL ZA</b><span class="pill">20 BAHT</span>
+			</div>
+			<img class="can" src="http://127.0.0.1:5173/images/chillza-can-transparent.png" alt="" />
+			<img class="mango" src="http://127.0.0.1:5173/images/mango.png" alt="" />
+			<img class="mascot" src="http://127.0.0.1:5173/images/chillza-character.png" alt="" />
+		</div>
+		<div class="route-body">
+			<h3>C. Premium Editorial</h3>
+			<p>
+				A quieter geometric split with tighter typography. Sophisticated, though it sacrifices some
+				of the joyful beverage-campaign energy the brand needs.
+			</p>
+		</div>
+	</div>
+</div>

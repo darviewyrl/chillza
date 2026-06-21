@@ -1,0 +1,543 @@
+<style>
+	.route-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+	.route {
+		border: 2px solid #eadfc7;
+		border-radius: 26px;
+		overflow: hidden;
+		background: #fffdf7;
+		cursor: pointer;
+		transition: 0.2s ease;
+	}
+	.route:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 18px 40px rgba(117, 74, 13, 0.16);
+	}
+	.route.selected {
+		border-color: #f97316;
+		box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.16);
+	}
+	.poster {
+		height: 360px;
+		position: relative;
+		overflow: hidden;
+		isolation: isolate;
+	}
+	.poster img {
+		position: absolute;
+		object-fit: contain;
+		user-select: none;
+		pointer-events: none;
+	}
+	.poster .copy {
+		position: absolute;
+		z-index: 7;
+		color: #20170d;
+		max-width: 41%;
+	}
+	.poster .eyebrow {
+		display: block;
+		margin-bottom: 10px;
+		font:
+			800 10px/1.3 'Trebuchet MS',
+			sans-serif;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: #1b7a4b;
+	}
+	.poster h3 {
+		margin: 0;
+		font:
+			900 47px/0.88 Impact,
+			Haettenschweiler,
+			'Arial Narrow Bold',
+			sans-serif;
+		letter-spacing: -1px;
+		text-transform: uppercase;
+	}
+	.poster p {
+		margin: 12px 0 0;
+		font:
+			600 12px/1.45 Georgia,
+			serif;
+		color: #4d3b2b;
+	}
+	.poster .price {
+		position: absolute;
+		z-index: 8;
+		width: 88px;
+		height: 88px;
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+		text-align: center;
+		background: radial-gradient(circle at 30% 30%, #ffd8a8 0 10%, #ff8d1f 46%, #d95300 100%);
+		color: #fffaf0;
+		border: 4px solid rgba(255, 249, 236, 0.92);
+		box-shadow: 0 15px 28px rgba(91, 34, 0, 0.24);
+		transform: rotate(8deg);
+		font:
+			900 14px/1 'Trebuchet MS',
+			sans-serif;
+	}
+	.poster .price span {
+		display: block;
+		font-size: 28px;
+		line-height: 0.9;
+	}
+	.poster .flare,
+	.poster .flare-two {
+		position: absolute;
+		border-radius: 50%;
+		pointer-events: none;
+	}
+	.poster .flare {
+		inset: -14% 32% 28% -12%;
+		background: radial-gradient(
+			circle at 64% 48%,
+			rgba(255, 252, 237, 0.95) 0 12%,
+			rgba(255, 220, 120, 0.78) 28%,
+			rgba(255, 178, 59, 0.24) 62%,
+			transparent 74%
+		);
+		z-index: 0;
+	}
+	.poster .flare-two {
+		inset: 44% -10% -20% 38%;
+		background: radial-gradient(
+			circle at 42% 34%,
+			rgba(255, 233, 167, 0.65) 0 18%,
+			rgba(255, 178, 49, 0.18) 52%,
+			transparent 72%
+		);
+		z-index: 0;
+	}
+	.poster .mist {
+		position: absolute;
+		inset: auto -10% -12% -8%;
+		height: 42%;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 251, 241, 0) 0%,
+			rgba(255, 244, 216, 0.35) 20%,
+			rgba(255, 235, 189, 0.78) 100%
+		);
+		z-index: 1;
+	}
+	.poster .can {
+		z-index: 5;
+		filter: drop-shadow(0 34px 32px rgba(107, 58, 2, 0.28));
+		mix-blend-mode: multiply;
+	}
+	.poster .mango {
+		z-index: 3;
+		filter: drop-shadow(0 22px 24px rgba(111, 59, 0, 0.18));
+	}
+	.poster .mascot {
+		z-index: 4;
+		filter: drop-shadow(0 20px 22px rgba(94, 52, 0, 0.14));
+	}
+	.poster .ice-back,
+	.poster .ice-front {
+		opacity: 0.9;
+		filter: drop-shadow(0 18px 18px rgba(73, 112, 138, 0.12));
+	}
+	.poster .ice-back {
+		z-index: 2;
+	}
+	.poster .ice-front {
+		z-index: 6;
+	}
+	.poster .splash {
+		position: absolute;
+		z-index: 2;
+		border-radius: 50%;
+		border: 14px solid rgba(255, 241, 199, 0.34);
+		filter: blur(0.2px);
+	}
+	.route-body {
+		padding: 16px 18px 18px;
+	}
+	.route-body h4 {
+		margin: 0 0 6px;
+		font-size: 18px;
+		color: #2e2014;
+	}
+	.route-body p {
+		margin: 0;
+		font-size: 13px;
+		line-height: 1.45;
+		color: #6d6256;
+	}
+	.recommended {
+		display: inline-flex;
+		margin-bottom: 9px;
+		border-radius: 999px;
+		padding: 4px 8px;
+		background: #dcfce7;
+		color: #166534;
+		font:
+			800 9px/1 'Trebuchet MS',
+			sans-serif;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+
+	.route-a .poster {
+		background:
+			radial-gradient(
+				circle at 72% 28%,
+				rgba(255, 251, 234, 0.82) 0 10%,
+				rgba(255, 208, 77, 0.52) 23%,
+				transparent 46%
+			),
+			linear-gradient(135deg, #fbefc7 0%, #ffd451 42%, #f6a312 100%);
+	}
+	.route-a .copy {
+		left: 26px;
+		top: 42px;
+	}
+	.route-a .can {
+		width: 52%;
+		height: 116%;
+		right: 13%;
+		top: -8%;
+	}
+	.route-a .mango {
+		width: 58%;
+		right: 0%;
+		top: 19%;
+		transform: rotate(-8deg);
+	}
+	.route-a .mascot {
+		height: 48%;
+		right: 4%;
+		bottom: 5%;
+	}
+	.route-a .price {
+		right: 18px;
+		top: 18px;
+	}
+	.route-a .ice-back.one {
+		width: 40%;
+		left: 50%;
+		top: -10%;
+		transform: rotate(18deg);
+	}
+	.route-a .ice-back.two {
+		width: 34%;
+		right: -4%;
+		bottom: 18%;
+		transform: rotate(-20deg);
+	}
+	.route-a .ice-front.one {
+		width: 44%;
+		left: -14%;
+		bottom: -12%;
+		transform: rotate(-14deg);
+	}
+	.route-a .ice-front.two {
+		width: 30%;
+		right: 10%;
+		bottom: -10%;
+		transform: rotate(8deg);
+	}
+	.route-a .splash.one {
+		width: 320px;
+		height: 220px;
+		right: 12%;
+		top: 20%;
+		transform: rotate(-14deg);
+	}
+	.route-a .splash.two {
+		width: 220px;
+		height: 150px;
+		right: 24%;
+		bottom: 2%;
+		transform: rotate(12deg);
+	}
+
+	.route-b .poster {
+		background:
+			radial-gradient(
+				circle at 50% 34%,
+				rgba(255, 252, 243, 0.88) 0 12%,
+				rgba(255, 215, 102, 0.4) 26%,
+				transparent 50%
+			),
+			linear-gradient(180deg, #ffe58c 0%, #ffb323 54%, #d66f00 100%);
+	}
+	.route-b .copy {
+		left: 24px;
+		bottom: 26px;
+		max-width: 46%;
+		color: #fff8ee;
+	}
+	.route-b .copy .eyebrow,
+	.route-b .copy p {
+		color: #fff2d0;
+	}
+	.route-b .can {
+		width: 58%;
+		height: 120%;
+		left: 31%;
+		top: -12%;
+	}
+	.route-b .mango {
+		width: 64%;
+		left: 27%;
+		top: 22%;
+		transform: rotate(6deg);
+	}
+	.route-b .mascot {
+		height: 44%;
+		left: 12%;
+		bottom: 11%;
+	}
+	.route-b .price {
+		right: 22px;
+		top: 26px;
+	}
+	.route-b .ice-back.one {
+		width: 38%;
+		left: -8%;
+		top: -10%;
+		transform: rotate(20deg);
+	}
+	.route-b .ice-back.two {
+		width: 34%;
+		right: -6%;
+		top: 42%;
+		transform: rotate(-14deg);
+	}
+	.route-b .ice-front.one {
+		width: 46%;
+		left: -10%;
+		bottom: -16%;
+		transform: rotate(-16deg);
+	}
+	.route-b .ice-front.two {
+		width: 34%;
+		right: 4%;
+		bottom: -12%;
+		transform: rotate(18deg);
+	}
+	.route-b .splash.one {
+		width: 300px;
+		height: 200px;
+		left: 34%;
+		top: 20%;
+		transform: rotate(18deg);
+		border-color: rgba(255, 248, 220, 0.26);
+	}
+	.route-b .splash.two {
+		width: 250px;
+		height: 180px;
+		left: 18%;
+		bottom: -2%;
+		transform: rotate(-12deg);
+		border-color: rgba(255, 239, 190, 0.24);
+	}
+
+	.route-c .poster {
+		background:
+			radial-gradient(
+				circle at 68% 34%,
+				rgba(255, 250, 234, 0.84) 0 11%,
+				rgba(255, 219, 126, 0.42) 22%,
+				transparent 44%
+			),
+			linear-gradient(150deg, #fef7e3 0%, #ffd15f 40%, #eca01c 100%);
+	}
+	.route-c:before {
+		content: '';
+		position: absolute;
+	}
+	.route-c .copy {
+		left: 26px;
+		top: 54px;
+		max-width: 38%;
+	}
+	.route-c .copy h3 {
+		font-size: 42px;
+	}
+	.route-c .can {
+		width: 50%;
+		height: 113%;
+		right: 18%;
+		top: -6%;
+	}
+	.route-c .mango {
+		width: 55%;
+		right: 7%;
+		top: 24%;
+		transform: rotate(-17deg);
+	}
+	.route-c .mascot {
+		height: 46%;
+		right: -1%;
+		bottom: 8%;
+	}
+	.route-c .price {
+		right: 24px;
+		top: 34px;
+	}
+	.route-c .ice-back.one {
+		width: 34%;
+		left: 48%;
+		top: -9%;
+		transform: rotate(28deg);
+	}
+	.route-c .ice-back.two {
+		width: 28%;
+		right: 8%;
+		bottom: 30%;
+		transform: rotate(-10deg);
+	}
+	.route-c .ice-front.one {
+		width: 42%;
+		left: -16%;
+		bottom: -15%;
+		transform: rotate(-18deg);
+	}
+	.route-c .ice-front.two {
+		width: 26%;
+		right: 16%;
+		bottom: -10%;
+		transform: rotate(12deg);
+	}
+	.route-c .splash.one {
+		width: 290px;
+		height: 200px;
+		right: 14%;
+		top: 24%;
+		transform: rotate(-24deg);
+	}
+	.route-c .splash.two {
+		width: 210px;
+		height: 150px;
+		right: 30%;
+		bottom: 4%;
+		transform: rotate(6deg);
+	}
+
+	@media (max-width: 920px) {
+		.route-grid {
+			grid-template-columns: 1fr;
+		}
+		.poster {
+			height: 320px;
+		}
+	}
+</style>
+
+<h2>Refined hero as one advertising key visual</h2>
+<p class="subtitle">
+	These three routes all move away from floating cutouts and stage the can, mango, mascot, ice,
+	badge, and light effects as one fused launch poster.
+</p>
+
+<div class="route-grid">
+	<div class="route route-a" data-choice="poster-arc" onclick="toggleSelect(this)">
+		<div class="poster">
+			<div class="flare"></div>
+			<div class="flare-two"></div>
+			<div class="mist"></div>
+			<div class="splash one"></div>
+			<div class="splash two"></div>
+			<div class="copy">
+				<span class="eyebrow">Sparkling mango soda tea</span>
+				<h3>CHILL ZA</h3>
+				<p>
+					Left-side copy with a tightly locked product cluster. The can dominates, the mango mass
+					sits behind it, and the mascot peeks in as a supporting character.
+				</p>
+			</div>
+			<div class="price"><span>20</span>BAHT</div>
+			<img class="ice-back one" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="ice-back two" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="mango" src="http://127.0.0.1:5173/images/mango.png" alt="" />
+			<img class="mascot" src="http://127.0.0.1:5173/images/chillza-character.png" alt="" />
+			<img class="can" src="http://127.0.0.1:5173/images/chillza-can.png" alt="" />
+			<img class="ice-front one" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="ice-front two" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+		</div>
+		<div class="route-body">
+			<span class="recommended">Recommended</span>
+			<h4>A. Poster Arc</h4>
+			<p>
+				Best match for your note. It keeps the copy readable while making the product cluster feel
+				like a real campaign key visual instead of assembled assets.
+			</p>
+		</div>
+	</div>
+
+	<div class="route route-b" data-choice="launch-burst" onclick="toggleSelect(this)">
+		<div class="poster">
+			<div class="flare"></div>
+			<div class="flare-two"></div>
+			<div class="mist"></div>
+			<div class="splash one"></div>
+			<div class="splash two"></div>
+			<div class="copy">
+				<span class="eyebrow">Pop your mood</span>
+				<h3>CHILL ZA</h3>
+				<p>
+					The most poster-like and energetic route. Stronger theatrical depth, but the product
+					cluster pushes further into the copy zone.
+				</p>
+			</div>
+			<div class="price"><span>20</span>BAHT</div>
+			<img class="ice-back one" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="ice-back two" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="mango" src="http://127.0.0.1:5173/images/mango.png" alt="" />
+			<img class="mascot" src="http://127.0.0.1:5173/images/chillza-character.png" alt="" />
+			<img class="can" src="http://127.0.0.1:5173/images/chillza-can.png" alt="" />
+			<img class="ice-front one" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="ice-front two" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+		</div>
+		<div class="route-body">
+			<h4>B. Launch Burst</h4>
+			<p>
+				Most dramatic and ad-like, with a near-central can and bigger spatial sweep. The trade-off
+				is slightly less calm premium restraint.
+			</p>
+		</div>
+	</div>
+
+	<div class="route route-c" data-choice="premium-sweep" onclick="toggleSelect(this)">
+		<div class="poster">
+			<div class="flare"></div>
+			<div class="flare-two"></div>
+			<div class="mist"></div>
+			<div class="splash one"></div>
+			<div class="splash two"></div>
+			<div class="copy">
+				<span class="eyebrow">Tropical sparkle launch</span>
+				<h3>CHILL ZA</h3>
+				<p>
+					A smoother diagonal sweep with the mango more visibly behind the can. Premium and
+					polished, though a little less punchy than A.
+				</p>
+			</div>
+			<div class="price"><span>20</span>BAHT</div>
+			<img class="ice-back one" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="ice-back two" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="mango" src="http://127.0.0.1:5173/images/mango.png" alt="" />
+			<img class="mascot" src="http://127.0.0.1:5173/images/chillza-character.png" alt="" />
+			<img class="can" src="http://127.0.0.1:5173/images/chillza-can.png" alt="" />
+			<img class="ice-front one" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+			<img class="ice-front two" src="http://127.0.0.1:5173/images/ice.png" alt="" />
+		</div>
+		<div class="route-body">
+			<h4>C. Premium Sweep</h4>
+			<p>
+				Cleaner and more refined, with better product depth than the original concept. It may need
+				one extra energy accent to avoid feeling too safe.
+			</p>
+		</div>
+	</div>
+</div>
